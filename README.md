@@ -3,6 +3,7 @@
 Lantern is a software package to support SMT analysis of affine
 multiplexing neural networks.
 
-Better documentation and examples coming soon. Check out the docstrings
-to get a quick overview.
+See: [docs/lantern](docs/lantern) for documentation.
+
+See: [requirements.txt](requirements.txt) for dependencies.
 
