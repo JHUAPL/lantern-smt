@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://gitlab.jhuapl.edu/brulejt1/lantern",
-    packages=setuptools.find_packages(exclude=["tests"]),
+    packages=setuptools.find_packages(exclude=["tests", "example"]),
     python_requires=">=3",
     install_requires=["torch",
                       "z3-solver"]
