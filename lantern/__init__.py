@@ -204,7 +204,7 @@ def as_z3(model, sort=z3.RealSort(), prefix=""):
         elif isinstance(module, nn.ReLU):
             in_vector = previous_vector
             if in_vector is None:
-                raise Exception("First layer must be linear")
+                raise ValueError("First layer must be linear")
 
             out_vector = const_vector("{}_relu{}_out".format(prefix, name),
                                       len(in_vector), sort)
@@ -214,7 +214,7 @@ def as_z3(model, sort=z3.RealSort(), prefix=""):
         elif isinstance(module, nn.Hardtanh):
             in_vector = previous_vector
             if in_vector is None:
-                raise Exception("First layer must be linear")
+                raise ValueError("First layer must be linear")
 
             out_vector = const_vector("{}_tanh{}_out".format(prefix, name),
                                       len(in_vector), sort)
@@ -227,7 +227,7 @@ def as_z3(model, sort=z3.RealSort(), prefix=""):
         elif isinstance(module, nn.Identity):
             pass
         else:
-            raise Exception("Don't know how to convert module: {}".format(module))
+            raise ValueError("Don't know how to convert module: {}".format(module))
 
         previous_vector = out_vector
 
