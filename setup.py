@@ -19,7 +19,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="lantern",
+    name="lantern-smt",
     version="0.1.0",
     author="Joshua Brule",
     author_email="joshua.brule@jhuapl.edu",
