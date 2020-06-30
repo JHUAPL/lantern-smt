@@ -50,6 +50,19 @@ def main():
     print(in_vars)
     print(out_vars)
     print()
+
+    # The 'payoff' is that we can prove theorems about our network with z3.
+    # Trivially, we can ask for a satisfying assignment of variables
+    print("A satisfying assignment to the variables in this network:")
+    z3.solve(constraints)
+    print()
+
+    # However, we can run the network "backwards"; e.g. what is an *input* that
+    # causes the network to output the value 0 (if such an input exists)?
+    constraints.append(out_vars[0] == 0)
+    print("An assignment such that the output variable is 0:")
+    z3.solve(constraints)
+    print()
     
     # To more precisely represent the underlying computations, consider using
     # an appropriate floating-point sort; PyTorch defaults to single precision.
@@ -63,19 +76,6 @@ def main():
     print(constraints)
     print(in_vars)
     print(out_vars)
-    print()
-
-    # The 'payoff' is that we can prove theorems about our network with z3.
-    # Trivially, we can ask for a satisfying assignment of variables
-    print("A satisfying assignment to the variables in this network:")
-    z3.solve(constraints)
-    print()
-
-    # However, we can run the network "backwards"; e.g. what is an *input* that
-    # causes the network to output the value 0 (if such an input exists)?
-    constraints.append(out_vars[0] == 0.0)
-    print("An assignment such that the output variable is 0.0:")
-    z3.solve(constraints)
     print()
 
     # The constraints and variables are ordinary Z3Py objects and can be
