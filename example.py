@@ -71,15 +71,22 @@ def main():
     # exponent part remains the same (11 bits) so that the result can be
     # returned as a Python float. Here, we truncate to 10 bits (half precision).
     rounded_net = lantern.round_model(net, 10)
-    constraints, in_vars, out_vars = lantern.as_z3(rounded_net, sort=z3.FPSort(11, 10))
-    print("Z3 constraints, input variables, output variables (FPSort(11, 10)):")
+    constraints, in_vars, out_vars = lantern.as_z3(rounded_net,
+                                                   sort=z3.FPSort(11, 10))
+    print("Z3 constraints, input, output (FPSort(11, 10)):")
     print(constraints)
     print(in_vars)
     print(out_vars)
     print()
+    
+    # We add the constraint that the output must be 0.0, and solve using a
+    # solver for FloatingPoint theory.
+    print("An assignment such that the output variable is 0.0:")
+    constraints.append(out_vars[0] == 0.0)
+    z3.solve_using(z3.SolverFor("QF_FP"), *constraints)
+    print()
 
-    # The constraints and variables are ordinary Z3Py objects and can be
-    # composed with additional constraints.
+    # Note that the constraints, and variables are all 'ordinary' Z3Py objects.
     print("Happy hacking!")
 
 

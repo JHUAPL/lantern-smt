@@ -10,3 +10,5 @@ See: [requirements.txt](requirements.txt) for dependencies.
 An annotated `example.py` demonstrates basic usage.
 
 Lantern was developed against `torch==1.5.0` and `z3-solver==4.8.7.0`.
+Linear Real Arithmetic appears to be stable, but we have noticed some changes
+to the floating point solvers as z3 continues to be developed.
