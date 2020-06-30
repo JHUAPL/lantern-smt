@@ -46,6 +46,21 @@ The &#39;public&#39; API includes:
 - as_z3(model, sort, prefix)
 &#34;&#34;&#34;
 
+# Copyright 2020 The Johns Hopkins University Applied Physics Laboratory LLC
+# All rights reserved.
+#
+# Licensed under the 3-Caluse BSD License (the &#34;License&#34;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# https://opensource.org/licenses/BSD-3-Clause
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import copy
 import struct
 from collections import OrderedDict
@@ -239,7 +254,7 @@ def as_z3(model, sort=z3.RealSort(), prefix=&#34;&#34;):
         elif isinstance(module, nn.ReLU):
             in_vector = previous_vector
             if in_vector is None:
-                raise Exception(&#34;First layer must be linear&#34;)
+                raise ValueError(&#34;First layer must be linear&#34;)
 
             out_vector = const_vector(&#34;{}_relu{}_out&#34;.format(prefix, name),
                                       len(in_vector), sort)
@@ -249,7 +264,7 @@ def as_z3(model, sort=z3.RealSort(), prefix=&#34;&#34;):
         elif isinstance(module, nn.Hardtanh):
             in_vector = previous_vector
             if in_vector is None:
-                raise Exception(&#34;First layer must be linear&#34;)
+                raise ValueError(&#34;First layer must be linear&#34;)
 
             out_vector = const_vector(&#34;{}_tanh{}_out&#34;.format(prefix, name),
                                       len(in_vector), sort)
@@ -262,7 +277,7 @@ def as_z3(model, sort=z3.RealSort(), prefix=&#34;&#34;):
         elif isinstance(module, nn.Identity):
             pass
         else:
-            raise Exception(&#34;Don&#39;t know how to convert module: {}&#34;.format(module))
+            raise ValueError(&#34;Don&#39;t know how to convert module: {}&#34;.format(module))
 
         previous_vector = out_vector
 
@@ -363,7 +378,7 @@ characteristics compared to a real arithmetic theory</p>
         elif isinstance(module, nn.ReLU):
             in_vector = previous_vector
             if in_vector is None:
-                raise Exception(&#34;First layer must be linear&#34;)
+                raise ValueError(&#34;First layer must be linear&#34;)
 
             out_vector = const_vector(&#34;{}_relu{}_out&#34;.format(prefix, name),
                                       len(in_vector), sort)
@@ -373,7 +388,7 @@ characteristics compared to a real arithmetic theory</p>
         elif isinstance(module, nn.Hardtanh):
             in_vector = previous_vector
             if in_vector is None:
-                raise Exception(&#34;First layer must be linear&#34;)
+                raise ValueError(&#34;First layer must be linear&#34;)
 
             out_vector = const_vector(&#34;{}_tanh{}_out&#34;.format(prefix, name),
                                       len(in_vector), sort)
@@ -386,7 +401,7 @@ characteristics compared to a real arithmetic theory</p>
         elif isinstance(module, nn.Identity):
             pass
         else:
-            raise Exception(&#34;Don&#39;t know how to convert module: {}&#34;.format(module))
+            raise ValueError(&#34;Don&#39;t know how to convert module: {}&#34;.format(module))
 
         previous_vector = out_vector
 
